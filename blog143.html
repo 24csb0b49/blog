@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Website</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@400&family=Quicksand:wght@600&display=swap" rel="stylesheet">
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            scroll-behavior: smooth;
+            animation: gradientBackground 15s ease infinite; /* Add the background animation */
+        }
+
+        @keyframes gradientBackground {
+            0% {
+                background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            }
+            25% {
+                background: linear-gradient(45deg, #6a11cb, #2575fc);
+            }
+            50% {
+                background: linear-gradient(45deg, #ff9a8b, #ff6a88);
+            }
+            75% {
+                background: linear-gradient(45deg, #ffbc00, #e34c26);
+            }
+            100% {
+                background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            animation: fadeIn 1s ease-out; /* Header fade-in animation */
+        }
+
+        header .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: logoAnimation 1s ease-in-out; /* Logo rotate and fade-in animation */
+        }
+
+        @keyframes logoAnimation {
+            0% {
+                transform: rotate(-360deg);
+                opacity: 0;
+            }
+            100% {
+                transform: rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #f2a900;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: #f2a900;
+            bottom: -5px;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-in-out;
+        }
+
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background-image: url('https://via.placeholder.com/1500x1000');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: rgba(0, 0, 0, 0.5); /* Darken the hero background */
+        }
+
+        .hero h1 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 60px;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .cta-button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #f2a900;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .cta-button:focus {
+            outline: none;
+        }
+
+        .cta-button span {
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.5);
+            animation: ripple 0.6s linear;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+        .cta-button:hover {
+            background-color: #e69a00;
+            transform: scale(1.05);
+        }
+
+        /* Blog Section */
+        .blog-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px 0;
+            background-color: #f4f4f4;
+        }
+
+        .blog-card {
+            background: white;
+            width: 300px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: cardAnimation 1s ease-out;
+        }
+
+        @keyframes cardAnimation {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-card img {
+            width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card img:hover {
+            transform: scale(1.1);
+        }
+
+        .blog-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        /* Categories Section */
+        .categories {
+            background-color: #222;
+            padding: 50px 0;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .categories h2 {
+            color: white;
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        .category-button {
+            background-color: #f2a900;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 20px 40px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-button:hover {
+            background-color: #e69a00;
+            transform: scale(1.2);
+        }
+
+        /* Subscribe Section */
+        .subscribe {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .subscribe form {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .subscribe input {
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .subscribe button {
+            padding: 12px 30px;
+            background-color: #f2a900;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .subscribe button:hover {
+            box-shadow: 0 0 10px rgba(242, 169, 0, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons i {
+            color: white;
+            font-size: 30px;
+            margin: 0 15px;
+            transition: transform 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icons i:hover {
+            color: #f2a900;
+            transform: rotate(360deg); /* Rotates the icon on hover */
+            animation: bounce 0.5s ease-in-out 1; /* Applies bounce animation */
+        }
+
+        /* Bounce Animation */
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.3) translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">BlogSite</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Blog</a>
+            <a href="#">Categories</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to Our Blog</h1>
+        <p>Explore the latest posts and stories</p>
+        <button class="cta-button">Get Started <span></span></button>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="blog-card">
+            <img src="C:\Users\Chandra\Downloads\nitw 1.webp" alt="Blog Image">
+            <h3>MY Journey in NITW</h3>
+            <p>In this post, we have lots of memores with my friends  in this clg, NITW is beautiful clg according to me u want to explore about the clg......read more </p>
+            <a href="https://www.nitw.ac.in" class="read-more">Read More</a>
+        </div>
+        <div class="blog-card">
+            <img src="C:\Users\Chandra\Downloads\nitw2.webp" alt="Blog Image">
+            <h3>importance about coiding</h3>
+            <p>Coding is essential as it empowers individuals to create solutions, automate tasks, and innovate in the digital world.it is to get the job how to learn coding....read more</p>
+           <a href="https://www.re-coded.com/open-study-hub?gad_source=1&gclid=CjwKCAiAtsa9BhAKEiwAUZAszehjB7EnmYV5DGToK1KTi5cAbMaNEUO1jCeaupEINaq2JM5LSAnuyxoCQOgQAvD_BwE" class="read-more">Read More</a> 
+        </div>
+        <div class="blog-card">
+            <img src="C:\Users\Chandra\Downloads\nitw3.png" alt="Blog Image">
+            <h3>Getting Started with JavaScript</h3>
+            <p>JavaScript is the backbone of interactivity on the web. This article will help you understand the fundamentals and create your first script...</p>
+            <a href="https://www.w3schools.com/js/" class="read-more">Read More</a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <h2>Explore Categories</h2>
+        <button class="category-button">Tech</button>
+        <button class="category-button">Health</button>
+        <button class="category-button">Lifestyle</button>
+        <button class="category-button">Food</button>
+
+    </section>
+
+    <!-- Subscribe Section -->
+    <section class="subscribe">
+        <h2>Subscribe to Our Newsletter</h2>
+        <form>
+            <input type="text" placeholder="Name">
+            <input type="email" placeholder="Email">
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 BlogSite. All rights reserved.</p>
+        <div class="social-icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+    </footer>
+
+    <!-- Font Awesome (for social icons) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <script>
+        // Ripple Effect for Button
+        const button = document.querySelector('.cta-button');
+        button.addEventListener('click', function (e) {
+            const span = button.querySelector('span');
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            span.style.width = `${size}px`;
+            span.style.height = `${size}px`;
+            span.style.left = `${x}px`;
+            span.style.top = `${y}px`;
+        });
+    </script>
+</body>
+</html>
